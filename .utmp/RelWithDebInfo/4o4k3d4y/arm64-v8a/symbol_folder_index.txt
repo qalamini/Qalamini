@@ -1,0 +1,1 @@
+/Users/syuhadarantisi/MyProgram/Unity/QalamForJunior/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4o4k3d4y/obj/arm64-v8a
