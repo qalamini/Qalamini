@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class MoveObject : MonoBehaviour
@@ -6,13 +7,15 @@ public class MoveObject : MonoBehaviour
     private float moveDuration;
     private Vector3 startPosition;
     private float elapsedTime = 0f;
+    [SerializeField] private TextMeshPro harfText;
 
-    public void Initialize(Vector3 targetPos, float duration)
+    public void Initialize(Vector3 targetPos, float duration, string currentHarfText)
     {
         startPosition = transform.position;
         targetPosition = targetPos;
         moveDuration = duration;
         elapsedTime = 0f;
+        harfText.text = currentHarfText;
     }
 
     void Update()

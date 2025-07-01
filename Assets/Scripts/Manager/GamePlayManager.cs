@@ -5,8 +5,8 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField] private GameObject harfPrefab;
     [SerializeField] private Transform spawnPoint;   // posisi awal (kiri)
     [SerializeField] private Transform targetPoint;  // posisi akhir (kanan)
-    private float moveDuration = 4f;
-    private float spawnInterval = 4f;
+    private float moveDuration = 8f;
+    private float spawnInterval = 6f;
 
     private float timer = 0f;
 
@@ -31,6 +31,6 @@ public class GamePlayManager : MonoBehaviour
     {
         GameObject harf = Instantiate(harfPrefab, spawnPoint.position, Quaternion.identity);
         MoveObject moveScript = harf.GetComponent<MoveObject>();
-        moveScript.Initialize(targetPoint.position, moveDuration);
+        moveScript.Initialize(targetPoint.position, moveDuration, GameManager.currentHarf.character);
     }
 }

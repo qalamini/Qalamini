@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DrawingPanel : MonoBehaviour
+public class DrawingManager : MonoBehaviour
 {
     public Camera m_camera;
     public GameObject brush;
@@ -8,29 +8,33 @@ public class DrawingPanel : MonoBehaviour
     LineRenderer currentLineRenderer;
 
     Vector2 lastPos;
+    public WritingSoundManager writingSoundManager;
 
     private void Update()
     {
         Drawing();
     }
 
-    void Drawing() 
+    void Drawing()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             CreateBrush();
+            lastPos = m_camera.ScreenToWorldPoint(Input.mousePosition);
         }
         else if (Input.GetKey(KeyCode.Mouse0))
         {
             PointToMousePos();
+            writingSoundManager.PlayWritingSound();
         }
-        else 
+        else
         {
             currentLineRenderer = null;
+            writingSoundManager.StopWritingSound();
         }
     }
 
-    void CreateBrush() 
+    void CreateBrush()
     {
         GameObject brushInstance = Instantiate(brush);
         currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
@@ -43,20 +47,21 @@ public class DrawingPanel : MonoBehaviour
 
     }
 
-    void AddAPoint(Vector2 pointPos) 
+    void AddAPoint(Vector2 pointPos)
     {
         currentLineRenderer.positionCount++;
         int positionIndex = currentLineRenderer.positionCount - 1;
         currentLineRenderer.SetPosition(positionIndex, pointPos);
     }
 
-    void PointToMousePos() 
+    void PointToMousePos()
     {
         Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
-        if (lastPos != mousePos) 
+        if (lastPos != mousePos)
         {
             AddAPoint(mousePos);
             lastPos = mousePos;
         }
     }
+
 }
