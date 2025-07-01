@@ -1383,6 +1383,14 @@ MonoBehaviour:
   - {fileID: 250797963}
   - {fileID: 304774639}
   - {fileID: 974307776}
+  alifButton: {fileID: 1610483438}
+  baButton: {fileID: 1894171409}
+  taButton: {fileID: 1454586136}
+  tsaButton: {fileID: 1944557739}
+  jimButton: {fileID: 354484897}
+  haButton: {fileID: 250797963}
+  khaButton: {fileID: 304774639}
+  dalButton: {fileID: 974307776}
   backButton: {fileID: 1923388288}
 --- !u!1 &1270201530
 GameObject:

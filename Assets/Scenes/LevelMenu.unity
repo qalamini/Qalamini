@@ -539,8 +539,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -648,7 +648,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Beginner \n(huruf gundul)"
+  m_text: "Advance \n(campuran)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae224bc23cddd428cbe6ef8bf2d9849e, type: 2}
   m_sharedMaterial: {fileID: -3604920653877764721, guid: ae224bc23cddd428cbe6ef8bf2d9849e, type: 2}
@@ -675,8 +675,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1420,7 +1420,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Beginner \n(huruf gundul)"
+  m_text: "Intermediet \n(huruf harokat)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae224bc23cddd428cbe6ef8bf2d9849e, type: 2}
   m_sharedMaterial: {fileID: -3604920653877764721, guid: ae224bc23cddd428cbe6ef8bf2d9849e, type: 2}
@@ -1447,8 +1447,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -141,7 +141,8 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -904,7 +905,7 @@ PlayerSettings:
   cloudProjectId: d7dceabc-6af1-463a-b70d-a173e7255784
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: QalamForJunior
+  projectName: Qalamini
   organizationId: bismillahmenang
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
