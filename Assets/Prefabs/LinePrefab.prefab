@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4625932929027721040}
   - component: {fileID: 7122905118707310324}
   - component: {fileID: 2109263264129483169}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LinePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,4 +152,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cd87c854c1644d980c5562cb6310b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 5

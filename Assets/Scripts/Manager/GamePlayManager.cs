@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GamePlayManager : MonoBehaviour
 {
@@ -10,11 +11,21 @@ public class GamePlayManager : MonoBehaviour
 
     private float timer = 0f;
 
+    public LineToImageConverter lineToImageConverter;
+    public HijaiyahRecognizer recognizer;
+
+    [SerializeField] public Button checkAnswer;
+
     // void Start()
     // {
     //     Vector3 leftMiddle = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, Camera.main.nearClipPlane + 10));
     //     spawnPoint.position = leftMiddle;
     // }
+
+    void Start()
+    {
+        checkAnswer.onClick.AddListener(() => CheckAnswer());
+    }
 
     void Update()
     {
@@ -32,5 +43,27 @@ public class GamePlayManager : MonoBehaviour
         GameObject harf = Instantiate(harfPrefab, spawnPoint.position, Quaternion.identity);
         MoveObject moveScript = harf.GetComponent<MoveObject>();
         moveScript.Initialize(targetPoint.position, moveDuration, GameManager.currentHarf.character);
+    }
+
+    public void CheckAnswer()
+    {
+        // Capture LineRenderer ke float[]
+        float[] inputArray = lineToImageConverter.CaptureAndConvert();
+
+        // Prediksi hurufnya
+        string result = recognizer.PredictHijaiyah(inputArray);
+
+        // Tampilkan hasil ke console
+        Debug.Log("✅ CheckAnswer - Hasil prediksi huruf: " + result);
+
+        // TODO: bandingkan dengan currentHarf dari GameManager
+        if(result == GameManager.currentHarf.name)
+        {
+            Debug.Log("✅ CheckAnswer - Jawaban Benar!");
+        }
+        else
+        {
+            Debug.Log("❌ CheckAnswer - Jawaban Salah.");
+        }
     }
 }
