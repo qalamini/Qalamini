@@ -53,10 +53,11 @@ public class HijaiyahRecognizer : MonoBehaviour
         Debug.Log("=== Output mentah model ===");
         for (int i = 0; i < outputArray.Length; i++)
         {
-            if (outputArray[i] > 0.3f)
-            {
-                Debug.Log($"Class {i}: {outputArray[i]:F4}");
-            }
+            Debug.Log($"Class {i}: {outputArray[i]:F4}");
+            // if (outputArray[i] > 0.3f)
+            // {
+            //     Debug.Log($"Class {i}: {outputArray[i]:F4}");
+            // }
         }
 
         // Pilih index dengan nilai paling tinggi
