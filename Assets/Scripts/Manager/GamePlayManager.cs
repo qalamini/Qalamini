@@ -17,13 +17,13 @@ public class GamePlayManager : MonoBehaviour
         {
             writingTimer += Time.deltaTime;
 
-            if (writingTimer >= 0.5f)
+            if (writingTimer >= 1.5f)
             {
                 isWriting = false;
                 writingTimer = 0f;
 
                 // Simpan gambar dan panggil CheckWriting
-                lineToImageConverter.CaptureAndSave();
+                // lineToImageConverter.CaptureAndSave();
                 CheckWriting();
             }
         }

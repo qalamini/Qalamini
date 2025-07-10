@@ -13,7 +13,7 @@ public class HarfMoveManager : MonoBehaviour
     [SerializeField] private float speed;
     private float collisionDistance = 2f;
     private GameObject harfObject;
-    private int countHarf = 0;
+    // private int countHarf = 0;
 
     private void Start()
     {
@@ -26,7 +26,7 @@ public class HarfMoveManager : MonoBehaviour
             harfObject.transform.Translate(Vector3.right * speed * Time.deltaTime);
             CheckCollisionWithBoundary();
         }
-        else if (harfObject == null && countHarf <= 10)
+        else if (harfObject == null && GameManager.currentHarfCount <= GameManager.harfLimit)
         {
             ReSpawnHarf();
         }
@@ -62,7 +62,7 @@ public class HarfMoveManager : MonoBehaviour
             harfObject = Instantiate(harfPrefab, new Vector3(-10, 0, 0), Quaternion.identity);
             harfObject.GetComponentInChildren<TextMeshPro>().text = GameManager.currentHarf.character;
             Debug.Log("Harf object recreated.");
-            countHarf++;
+            GameManager.currentHarfCount++;
         }
     }
 
@@ -75,6 +75,18 @@ public class HarfMoveManager : MonoBehaviour
             GameManager.isCorrect = true;
             GameManager.score += 1;
             Debug.Log("Harf object destroyed.");
+        }
+    }
+
+    public void OnWriteHarfWrong()
+    {
+        if (harfObject != null)
+        {
+            Destroy(harfObject);
+            harfObject = null;
+            GameManager.isCorrect = false;
+            GameManager.life--;
+            Debug.Log("Harf object destroyed due to wrong writing.");
         }
     }
 
