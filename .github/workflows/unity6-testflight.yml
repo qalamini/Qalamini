@@ -22,6 +22,15 @@ jobs:
         with:
           path: Library
           key: Library-Unity6-iOS-${{ hashFiles('Assets/**', 'Packages/**') }}
+
+            # Debug: Check Unity license format
+      - name: Debug Unity License
+        run: |
+          echo "Unity Email: ${{ secrets.UNITY_EMAIL }}"
+          echo "Unity License length: ${#UNITY_LICENSE}"
+          echo "Unity License starts with: ${UNITY_LICENSE:0:50}"
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           
       - name: Build Unity 6 for iOS
         uses: game-ci/unity-builder@v4
