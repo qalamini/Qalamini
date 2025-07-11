@@ -77,3 +77,4 @@ Builds/
 .plastic/
 ignore.conf
 .utmp/
+DontPush/
