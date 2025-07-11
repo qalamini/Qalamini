@@ -11,8 +11,12 @@ public class GamePlayController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI score;
     [SerializeField] private TextMeshProUGUI timer;
     [SerializeField] private Image[] live;
-    private float countdownTime = 60f; // 60 detik
 
+    void Awake()
+    {
+        GameManager.ResetGame();
+    }
+    
     void Start()
     {
         if (backButton != null)
@@ -21,20 +25,44 @@ public class GamePlayController : MonoBehaviour
 
     void Update()
     {
-        // Hitung mundur timer
-        if (countdownTime > 0)
+
+        if (GameManager.countdownTime > 0 && GameManager.life > 0)
         {
-            countdownTime -= Time.deltaTime;
-
-            int minutes = Mathf.FloorToInt(countdownTime / 60);
-            int seconds = Mathf.FloorToInt(countdownTime % 60);
-
-            timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            GameStateUpdate();
+            // harusnya nanti dilakukan kodndisi kalau harf nya sampai 10 minimal bintang 1
+            // 15 harf minimal bintang 2
+            // 20 harf minimal bintang 3
+            if (GameManager.currentHarfCount == GameManager.harfLimit)
+            {
+                // WIN CONDITION
+                GameManager.isWinning = true;
+                SceneManager.LoadScene("GameResult");
+            }
         }
         else
         {
-            // Jika waktu habis, load BeginnerStage
-            SceneManager.LoadScene("BeginnerStage");
+            // LOSE CONDITION
+            GameManager.isLose = true;
+            SceneManager.LoadScene("GameResult");
+
+        }
+    }
+
+    private void GameStateUpdate()
+    {
+        GameManager.countdownTime -= Time.deltaTime;
+
+        int minutes = Mathf.FloorToInt(GameManager.countdownTime / 60);
+        int seconds = Mathf.FloorToInt(GameManager.countdownTime % 60);
+
+        timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+        score.text = GameManager.score.ToString();
+
+        for (int i = 0; i < live.Length; i++)
+        {
+            if (i < GameManager.life) live[i].enabled = true;
+            else live[i].enabled = false;
         }
     }
 }

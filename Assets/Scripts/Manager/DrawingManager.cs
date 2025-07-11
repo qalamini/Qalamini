@@ -10,6 +10,9 @@ public class DrawingManager : MonoBehaviour
     Vector2 lastPos;
     public WritingSoundManager writingSoundManager;
 
+    // Add a reference to GamePlayManager
+    public GamePlayManager gamePlayManager;
+
     private void Update()
     {
         Drawing();
@@ -19,6 +22,8 @@ public class DrawingManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            // Assuming you have a reference to a GamePlayManager instance called 'gamePlayManager'
+            gamePlayManager.StartWriting();
             CreateBrush();
             lastPos = m_camera.ScreenToWorldPoint(Input.mousePosition);
         }
@@ -39,7 +44,6 @@ public class DrawingManager : MonoBehaviour
         GameObject brushInstance = Instantiate(brush);
         currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
 
-        //because you gotta have 2 points to start a line renderer, 
         Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
 
         currentLineRenderer.SetPosition(0, mousePos);

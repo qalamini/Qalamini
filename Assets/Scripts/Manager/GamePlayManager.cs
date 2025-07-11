@@ -2,35 +2,58 @@ using UnityEngine;
 
 public class GamePlayManager : MonoBehaviour
 {
-    [SerializeField] private GameObject harfPrefab;
-    [SerializeField] private Transform spawnPoint;   // posisi awal (kiri)
-    [SerializeField] private Transform targetPoint;  // posisi akhir (kanan)
-    private float moveDuration = 8f;
-    private float spawnInterval = 6f;
 
-    private float timer = 0f;
+    public LineToImageConverter lineToImageConverter;
+    public HijaiyahRecognizer recognizer;
+    public HarfMoveManager harfMoveManager;
 
-    // void Start()
-    // {
-    //     Vector3 leftMiddle = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, Camera.main.nearClipPlane + 10));
-    //     spawnPoint.position = leftMiddle;
-    // }
+    private float writingTimer = 0f;
+    private bool isWriting = false;
+
 
     void Update()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= spawnInterval)
+        if (isWriting)
         {
-            SpawnHarf();
-            timer = 0f;
+            writingTimer += Time.deltaTime;
+
+            if (writingTimer >= 1.5f)
+            {
+                isWriting = false;
+                writingTimer = 0f;
+
+                // Simpan gambar dan panggil CheckWriting
+                // lineToImageConverter.CaptureAndSave();
+                CheckWriting();
+            }
         }
     }
 
-    void SpawnHarf()
+    public void StartWriting()
     {
-        GameObject harf = Instantiate(harfPrefab, spawnPoint.position, Quaternion.identity);
-        MoveObject moveScript = harf.GetComponent<MoveObject>();
-        moveScript.Initialize(targetPoint.position, moveDuration, GameManager.currentHarf.character);
+        isWriting = true;
+        writingTimer = 0f;
     }
+
+
+    private void CheckWriting()
+    {
+
+        // if (string.IsNullOrEmpty(GameManager.filePath))
+        // {
+        //     Debug.LogError("File path is empty. Please ensure a drawing is saved first.");
+        //     return;
+        // }
+
+        // Texture2D texture = Resources.Load<Texture2D>(GameManager.filePath);
+        // float[] inputArray = LineToImageConverter.ConvertToArray(texture);
+
+        // string result = recognizer.PredictHijaiyah(inputArray);
+        // Debug.Log("Predicted Hijaiyah letter: " + result);
+
+        // if (result == GameManager.currentHarf.name) Debug.Log("Correct prediction!");
+        // else Debug.Log("Incorrect prediction.");
+        harfMoveManager.OnWriteHarfCorrect();
+    }
+
 }
