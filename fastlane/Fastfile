@@ -1,0 +1,49 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Build Unity 6 and Deploy to TestFlight"
+  lane :unity_to_testflight do
+    
+    # Increment build number
+    increment_build_number(
+      xcodeproj: "./build/iOS/Unity-iPhone.xcodeproj",
+      build_number: latest_testflight_build_number + 1
+    )
+    
+    # Handle code signing
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: "./build/iOS/Unity-iPhone.xcodeproj",
+      team_id: ENV["TEAM_ID"],
+      code_sign_identity: "iPhone Distribution"
+    )
+    
+    # Build iOS app
+    build_app(
+      project: "./build/iOS/Unity-iPhone.xcodeproj",
+      scheme: "Unity-iPhone",
+      export_method: "app-store",
+      output_directory: "./build/output",
+      export_options: {
+        method: "app-store",
+        uploadBitcode: false,
+        uploadSymbols: true,
+        compileBitcode: false
+      }
+    )
+    
+    # Upload to TestFlight
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      skip_submission: true,
+      distribute_external: false,
+      notify_external_testers: false
+    )
+    
+    # Notification
+    slack(
+      message: "Unity 6 build uploaded to TestFlight! 🚀",
+      success: true
+    ) if ENV["SLACK_URL"]
+  end
+end

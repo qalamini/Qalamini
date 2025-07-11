@@ -1,0 +1,42 @@
+name: Unity 6 to TestFlight
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+          
+      - name: Cache Unity Library
+        uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-Unity6-iOS-${{ hashFiles('Assets/**', 'Packages/**') }}
+          
+      - name: Build Unity 6 for iOS
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: iOS
+          buildPath: build/iOS
+          unityVersion: 6000.0.23f1  # Sesuaikan dengan versi Unity 6 Anda
+          
+      - name: Install Fastlane Dependencies
+        run: bundle install
+        
+      - name: Deploy with Fastlane
+        run: bundle exec fastlane unity_to_testflight
+        env:
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}

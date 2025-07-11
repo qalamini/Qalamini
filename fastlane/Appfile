@@ -1,0 +1,7 @@
+app_identifier("com.BismillahMenangDAQ.Qalamini") # Bundle ID
+apple_id("rantisi729@gmail.com")    # Apple ID
+team_id("YZ2F93V5R5")               # Developer Team ID
+
+# Untuk macOS
+# apple_dev_portal_id("your-apple-id@example.com")
+# itunes_connect_id("your-apple-id@example.com")
