@@ -32,8 +32,8 @@ jobs:
         with:
           targetPlatform: iOS
           buildsPath: build
-          buildName: YourAppName
-          unityVersion: 6000.1.9f1  # Sesuai dengan versi Anda
+          buildName: Qalamini
+          unityVersion: 6000.1.9f1  
           
       - name: Install Fastlane Dependencies
         run: bundle install
