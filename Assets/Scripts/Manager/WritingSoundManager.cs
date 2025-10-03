@@ -19,4 +19,5 @@ public class WritingSoundManager : MonoBehaviour
             writingAudio.Stop();
         }
     }
+
 }
