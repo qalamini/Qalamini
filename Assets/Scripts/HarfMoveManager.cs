@@ -3,13 +3,16 @@ using UnityEngine;
 
 public class HarfMoveManager : MonoBehaviour
 {
+    // Class ini bertanggung jawab untuk mengelola pergerakan huruf (harf) di layar, 
+    // termasuk spawn ulang huruf, mendeteksi tabrakan dengan batas tertentu, 
+    // dan menangani aksi ketika pengguna menulis huruf dengan benar atau salah.
+
 
     [SerializeField] private GameObject harfPrefab;
     [SerializeField] private GameObject boundaryLine;
+    [SerializeField] private GameObject trueIcon;
+    [SerializeField] private GameObject falseIcon;
 
-    // bagaimana membuat speed nya lebih lambat lagi?
-    // misalnya 0.0005f, tapi tidak terlalu lambat sehingga tidak terlihat
-    // atau bisa juga menggunakan Time.deltaTime untuk mengatur kecepatan
     [SerializeField] private float speed;
     private float collisionDistance = 2f;
     private GameObject harfObject;
@@ -75,6 +78,8 @@ public class HarfMoveManager : MonoBehaviour
             GameManager.isCorrect = true;
             GameManager.score += 1;
             Debug.Log("Harf object destroyed.");
+            trueIcon.SetActive(true);
+            Invoke("HideTrueIcon", 1f); // Sembunyikan ikon setelah 1 detik
         }
     }
 
@@ -82,12 +87,23 @@ public class HarfMoveManager : MonoBehaviour
     {
         if (harfObject != null)
         {
-            Destroy(harfObject);
-            harfObject = null;
+            // Destroy(harfObject);
+            // harfObject = null;
             GameManager.isCorrect = false;
-            GameManager.life--;
+            // GameManager.life--;
             Debug.Log("Harf object destroyed due to wrong writing.");
+            falseIcon.SetActive(true);
+            Invoke("HideFalseIcon", 1f); // Sembunyikan ikon setelah 1 detik
         }
+    }
+
+    private void HideTrueIcon()
+    {
+        trueIcon.SetActive(false);
+    }
+    private void HideFalseIcon()
+    {
+        falseIcon.SetActive(false);
     }
 
 }

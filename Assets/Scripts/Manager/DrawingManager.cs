@@ -13,6 +13,9 @@ public class DrawingManager : MonoBehaviour
     // Add a reference to GamePlayManager
     public GamePlayManager gamePlayManager;
 
+    // private float lastDrawTime;        // Waktu terakhir player menggambar
+    // private bool isDrawing = false;    // Status player sedang menggambar?
+
     private void Update()
     {
         Drawing();
@@ -29,13 +32,14 @@ public class DrawingManager : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.Mouse0))
         {
+            gamePlayManager.StartWriting();
             PointToMousePos();
-            writingSoundManager.PlayWritingSound();
+            // writingSoundManager.PlayWritingSound();
         }
         else
         {
             currentLineRenderer = null;
-            writingSoundManager.StopWritingSound();
+            // writingSoundManager.StopWritingSound();
         }
     }
 

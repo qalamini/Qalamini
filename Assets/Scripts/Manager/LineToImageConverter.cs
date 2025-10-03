@@ -27,6 +27,7 @@ public class LineToImageConverter : MonoBehaviour
         // Cleanup
         drawingCamera.targetTexture = null;
         RenderTexture.active = null;
+        rt.Release();
         Destroy(rt);
 
         return tex;
@@ -58,29 +59,29 @@ public class LineToImageConverter : MonoBehaviour
 
         Debug.Log("Saved LineRenderer image to: " + filePath);
     }
-    
+
     public static float[] ConvertToArray(Texture2D texture)
     {
-        // Buat RenderTexture untuk resize
-        RenderTexture rt = RenderTexture.GetTemporary(32, 32, 0, RenderTextureFormat.Default, RenderTextureReadWrite.Linear);
+        int width = 128;  // sesuai input model
+        int height = 64;  // sesuai input model
 
-        // Blit (copy) texture ke RenderTexture
+        // Resize ke ukuran yang benar
+        RenderTexture rt = RenderTexture.GetTemporary(width, height, 0, RenderTextureFormat.Default, RenderTextureReadWrite.Linear);
         Graphics.Blit(texture, rt);
 
-        // Set active RT dan baca ke Texture2D baru
         RenderTexture previous = RenderTexture.active;
         RenderTexture.active = rt;
 
-        Texture2D resized = new Texture2D(32, 32, TextureFormat.RGB24, false);
-        resized.ReadPixels(new Rect(0, 0, 32, 32), 0, 0);
+        Texture2D resized = new Texture2D(width, height, TextureFormat.RGB24, false);
+        resized.ReadPixels(new Rect(0, 0, width, height), 0, 0);
         resized.Apply();
 
         RenderTexture.active = previous;
         RenderTexture.ReleaseTemporary(rt);
 
-        // Convert ke grayscale dan normalisasi [0-1]
+        // Convert ke grayscale (atau RGB kalau model butuh 3 channel)
         Color32[] pixels = resized.GetPixels32();
-        float[] result = new float[32 * 32];
+        float[] result = new float[width * height];  // 8192 elemen
 
         for (int i = 0; i < pixels.Length; i++)
         {

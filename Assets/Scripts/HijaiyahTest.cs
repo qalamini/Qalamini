@@ -2,28 +2,28 @@ using UnityEngine;
 
 public class HijaiyahTest : MonoBehaviour
 {
-    public HijaiyahRecognizer recognizer;
+    // public HijaiyahRecognizer recognizer;
 
-    void Start()
-    {
-        // Load image dummy dari Resources folder
-        Texture2D testTexture = Resources.Load<Texture2D>("TestImages/bates");
+    // void Start()
+    // {
+    //     // Load image dummy dari Resources folder
+    //     Texture2D testTexture = Resources.Load<Texture2D>("TestImages/ba");
         
-        if (testTexture != null)
-        {
-            // Convert Texture2D ke float[] input model
-            float[] inputArray = LineToImageConverter.ConvertToArray(testTexture);
+    //     if (testTexture != null)
+    //     {
+    //         // Convert Texture2D ke float[] input model
+    //         float[] inputArray = LineToImageConverter.ConvertToArray(testTexture);
 
-            // Predict
-            string result = recognizer.PredictHijaiyah(inputArray);
+    //         // Predict
+    //         string result = recognizer.PredictHijaiyah(inputArray);
 
-            Debug.Log("✅ Prediksi huruf: " + result);
-        }
-        else
-        {
-            Debug.LogError("❌ Gagal load test image");
-        }
-    }
+    //         Debug.Log("✅ Prediksi huruf: " + result);
+    //     }
+    //     else
+    //     {
+    //         Debug.LogError("❌ Gagal load test image");
+    //     }
+    // }
 
 
 }

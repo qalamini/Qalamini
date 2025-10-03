@@ -4,25 +4,26 @@ public class HijaiyahLetter
 {
     public int id;
     public string name; 
-    public string character; 
+    public string character;
+    public int starsEarned; // 0 to 3 
 
-    public HijaiyahLetter(int id, string name, string character)
+    public HijaiyahLetter(int id, string name, string character, int starsEarned = 0)
     {
         this.id = id;
         this.name = name;
         this.character = character;
+        this.starsEarned = starsEarned;
     }
 }
 
 
 public static class HijaiyahDatabase
 {
-
     public static List<HijaiyahLetter> letters = new List<HijaiyahLetter>
     {
-        new HijaiyahLetter(1, "alif", "ا"),
-        new HijaiyahLetter(2, "ba", "ب"),
-        new HijaiyahLetter(3, "ta", "ت"),
+        new HijaiyahLetter(1, "alif", "ا", 3),
+        new HijaiyahLetter(2, "ba", "ب", 2),
+        new HijaiyahLetter(3, "ta", "ت", 1),
         new HijaiyahLetter(4, "tsa", "ث"),
         new HijaiyahLetter(5, "jim", "ج"),
         new HijaiyahLetter(6, "ha", "ح"),
@@ -70,4 +71,44 @@ public static class HijaiyahDatabase
     }
 
 }
+
+[System.Serializable]
+public class HijaiyahDataJson
+{
+    public HijaiyahScore hijaiyah;
+}
+
+[System.Serializable]
+public class HijaiyahScore
+{
+    public int alif;
+    public int ba;
+    public int ta;
+    public int tsa;
+    public int jim;
+    public int ha;
+    public int kha;
+    public int dal;
+    public int dzal;
+    public int ra;
+    public int zai;
+    public int sin;
+    public int syin;
+    public int shad;
+    public int dhad;
+    public int tha;
+    public int zha;
+    public int ain;
+    public int ghain;
+    public int fa;
+    public int qaf;
+    public int kaf;
+    public int lam;
+    public int mim;
+    public int nun;
+    public int wawu;
+    public int ha_marbutoh;
+    public int ya;
+}
+
 

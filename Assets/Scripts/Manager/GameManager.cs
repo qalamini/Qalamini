@@ -3,15 +3,15 @@ using Unity.VisualScripting;
 public static class GameManager
 {
     public static HijaiyahLetter currentHarf = HijaiyahDatabase.GetLetterById(1); // Default to the first letter
-    public static int score = 0;
-    public static int life = 3;
-    public static float countdownTime = 60;
+    public static int score;
+    public static int life;
+    public static float countdownTime;
     public static string filePath;
     public static bool isCorrect;
-    public static bool isWinning = false;
-    public static bool isLose = false;
-    public static int harfLimit = 10;
-    public static int currentHarfCount = 0;
+    public static bool isWinning;
+    public static bool isLose;
+    public static int harfLimit = 20;
+    public static int currentHarfCount;
 
     public static void ResetGame()
     {
